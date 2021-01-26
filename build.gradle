@@ -25,6 +25,24 @@ allprojects {
 }
 
 apply plugin: 'org.owasp.dependencycheck'
+dependencyCheck {
+    def skipConfigurationPatterns = [
+            "lintClassPath"
+    ]
+
+    allprojects {
+        configurations.all { configuration ->
+            if (configuration.name in skipConfigurations) {
+                return
+            }
+            skipConfigurationPatterns.each { pattern ->
+                if (configuration.name.matches(pattern)) {
+                    skipConfigurations << configuration.name
+                }
+            }
+        }
+    }
+}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
