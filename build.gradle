@@ -24,6 +24,12 @@ allprojects {
     }
 }
 
+subprojects {
+    afterEvaluate {
+        check.dependsOn dependencyCheckAggregate
+    }
+}
+
 apply plugin: 'org.owasp.dependencycheck'
 dependencyCheck {
     def skipConfigurationPatterns = [
@@ -45,6 +51,7 @@ dependencyCheck {
     }
 
     suppressionFile = 'dependency-check-suppressions.xml'
+    failBuildOnCVSS = 5
 }
 
 task clean(type: Delete) {
