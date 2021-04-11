@@ -6,4 +6,10 @@
    ]]></notes>
         <cve>CVE-2020-15824</cve>
     </suppress>
+    <suppress>
+        <notes><![CDATA[
+        This suppresses Kotlin CVE-2020-29582
+   ]]></notes>
+        <cve>CVE-2020-29582</cve>
+    </suppress>
 </suppressions>
